@@ -1,0 +1,1 @@
+Obviously not efficient at all, missing key functionalities. Purpose as TDD with PyTest exercise
