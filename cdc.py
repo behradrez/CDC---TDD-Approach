@@ -22,14 +22,13 @@ def format_result(result_tuple):
 def parse_input_and_push_stack(curr_input, stack):
     if not curr_input:
         return
-    input_term = f"{curr_input[0]} "
-    for arg in curr_input[1:]:
-        if arg == 'j':
-            input_term += "j"
-        else:
-            input_term += f"{arg} " 
+    term = ''.join(curr_input).strip()
+    if '+j' in term:
+        term = f"{term.split('+j')[0]} + j{term.split('+j')[1]}"
+    elif '-j' in term:
+        term = f"{term.split('-j')[0]} - j{term.split('-j')[1]}"
     curr_input.clear()
-    stack.append(split_complex(input_term.strip()))
+    stack.append(split_complex(term.strip()))
 
 def perform_stack_operation(stack, op):
     if len(stack) < 2:
@@ -79,4 +78,4 @@ def calc(args):
     return format_result(stack.pop())
 
 if __name__ == "__main__":
-    calc(sys.argv[1:])
+    print(calc(sys.argv[1:]))
